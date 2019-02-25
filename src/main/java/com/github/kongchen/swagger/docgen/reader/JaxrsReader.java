@@ -443,6 +443,11 @@ public class JaxrsReader extends AbstractReader implements ClassSwaggerReader {
             }
         }
 
+        ApiResponses defaultResponses = AnnotationUtils.findAnnotation(method.getDeclaringClass(), ApiResponses.class);
+        if (defaultResponses != null) {
+            updateApiResponse(operation, defaultResponses);
+        }
+
         ApiResponses responseAnnotation = AnnotationUtils.findAnnotation(method, ApiResponses.class);
         if (responseAnnotation != null) {
             updateApiResponse(operation, responseAnnotation);
